@@ -1,6 +1,6 @@
 {
   "name": "generator-bitmaker-prototyping",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
@@ -20,7 +20,12 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "bitmakerlabs",
+    "bitmaker",
+    "rapid-prototyping",
+    "prototyping",
+    "bitmaker-prototyping"
   ],
   "dependencies": {
     "yeoman-generator": "~0.16.0",
