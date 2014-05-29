@@ -178,6 +178,11 @@ module.exports = function (grunt) {
                         '{,*/}*.html',
                         'styles/fonts/{,*/}*.*'
                     ]
+                },{
+                  expand: true,
+                  cwd: '.tmp/styles',
+                  src: '{,*/}*.css',
+                  dest: '<%= config.dist %>/styles/'
                 }]
             },
             styles: {
@@ -266,8 +271,6 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'newer:jshint',
-        'test',
-        'build'
+        'serve'
     ]);
 };
