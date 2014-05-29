@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title><%= appname %></title>
+
+    <% if (includeBootstrap && !includeSass) { %><link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"><% } %>
+
+    <link rel="stylesheet" href="styles/main.css">
+
+    <% if (includeModernizr) { %>
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="../bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+    <% } %>
+  </head>
+
+  <body>
+    Time to start prototyping!
+
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
