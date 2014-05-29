@@ -84,7 +84,7 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
   },
 
   gruntfile: function() {
-    this.copy('Gruntfile.js', 'Gruntfile.js');
+    this.template('Gruntfile.js');
   },
 
   projectfiles: function () {

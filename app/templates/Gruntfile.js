@@ -35,7 +35,7 @@ module.exports = function (grunt) {
                 tasks: ['bowerInstall']
             },
             js: {
-                files: ['<%= config.app %>/scripts/{,*/}*.js'],
+                files: ['<%%= config.app %>/scripts/{,*/}*.js'],
                 tasks: ['jshint'],
                 options: {
                     livereload: true
@@ -45,21 +45,21 @@ module.exports = function (grunt) {
                 files: ['Gruntfile.js']
             },
             sass: {
-                files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
+                files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['sass:server', 'autoprefixer']
             },
             styles: {
-                files: ['<%= config.app %>/styles/{,*/}*.css'],
+                files: ['<%%= config.app %>/styles/{,*/}*.css'],
                 tasks: ['newer:copy:styles', 'autoprefixer']
             },
             livereload: {
                 options: {
-                    livereload: '<%= connect.options.livereload %>'
+                    livereload: '<%%= connect.options.livereload %>'
                 },
                 files: [
-                    '<%= config.app %>/{,*/}*.html',
+                    '<%%= config.app %>/{,*/}*.html',
                     '.tmp/styles/{,*/}*.css',
-                    '<%= config.app %>/images/{,*/}*'
+                    '<%%= config.app %>/images/{,*/}*'
                 ]
             }
         },
@@ -86,7 +86,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 options: {
-                    base: '<%= config.dist %>',
+                    base: '<%%= config.dist %>',
                     livereload: false
                 }
             }
@@ -99,8 +99,8 @@ module.exports = function (grunt) {
                     dot: true,
                     src: [
                         '.tmp',
-                        '<%= config.dist %>/*',
-                        '!<%= config.dist %>/.git*'
+                        '<%%= config.dist %>/*',
+                        '!<%%= config.dist %>/.git*'
                     ]
                 }]
             },
@@ -115,8 +115,8 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= config.app %>/scripts/{,*/}*.js',
-                '!<%= config.app %>/scripts/vendor/*',
+                '<%%= config.app %>/scripts/{,*/}*.js',
+                '!<%%= config.app %>/scripts/vendor/*',
                 'test/spec/{,*/}*.js'
             ]
         },
@@ -131,7 +131,7 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= config.app %>/styles',
+                    cwd: '<%%= config.app %>/styles',
                     src: ['*.scss'],
                     dest: '.tmp/styles',
                     ext: '.css'
@@ -140,7 +140,7 @@ module.exports = function (grunt) {
             server: {
                 files: [{
                     expand: true,
-                    cwd: '<%= config.app %>/styles',
+                    cwd: '<%%= config.app %>/styles',
                     src: ['*.scss'],
                     dest: '.tmp/styles',
                     ext: '.css'
@@ -163,14 +163,33 @@ module.exports = function (grunt) {
             }
         },
 
+        // Reads HTML for usemin blocks to enable smart builds that automatically
+        // concat, minify and revision files. Creates configurations in memory so
+        // additional tasks can operate on them
+        useminPrepare: {
+            options: {
+                dest: '<%%= config.dist %>'
+            },
+            html: ['<%%= config.dist %>/index.html']
+        },
+
+        // Performs rewrites based on rev and the useminPrepare configuration
+        usemin: {
+            options: {
+                assetsDirs: ['<%%= config.dist %>']
+            },
+            html: ['<%%= config.dist %>/{,*/}*.html'],
+            css: ['<%%= config.dist %>/styles/{,*/}*.css']
+        },
+
         // Copies remaining files to places other tasks can use
         copy: {
             dist: {
                 files: [{
                     expand: true,
                     dot: true,
-                    cwd: '<%= config.app %>',
-                    dest: '<%= config.dist %>',
+                    cwd: '<%%= config.app %>',
+                    dest: '<%%= config.dist %>',
                     src: [
                         '*.{ico,png,txt}',
                         '.htaccess',
@@ -182,34 +201,42 @@ module.exports = function (grunt) {
                   expand: true,
                   cwd: '.tmp/styles',
                   src: '{,*/}*.css',
-                  dest: '<%= config.dist %>/styles/'
+                  dest: '<%%= config.dist %>/styles/'
+                },{
+                  expand: true,
+                  dot: true,
+                  cwd: '<%%= config.app %>/scripts',
+                  dest: '<%%= config.dist %>/scripts/',
+                  src: '{,*/}*.js'
                 }]
             },
             styles: {
                 expand: true,
                 dot: true,
-                cwd: '<%= config.app %>/styles',
+                cwd: '<%%= config.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
             }
         },
 
+        // <% if (includeModernizr) { %>
         // Generates a custom Modernizr build that includes only the tests you
         // reference in your app
         modernizr: {
             dist: {
                 devFile: 'bower_components/modernizr/modernizr.js',
-                outputFile: '<%= config.dist %>/scripts/vendor/modernizr.js',
+                outputFile: '<%%= config.dist %>/scripts/vendor/modernizr.js',
                 files: {
                     src: [
-                        '<%= config.dist %>/scripts/{,*/}*.js',
-                        '<%= config.dist %>/styles/{,*/}*.css',
-                        '!<%= config.dist %>/scripts/vendor/*'
+                        '<%%= config.dist %>/scripts/{,*/}*.js',
+                        '<%%= config.dist %>/styles/{,*/}*.css',
+                        '!<%%= config.dist %>/scripts/vendor/*'
                     ]
                 },
                 uglify: true
             }
         },
+        // <% } %>
 
         // Run some tasks in parallel to speed up build process
         concurrent: {
@@ -267,7 +294,9 @@ module.exports = function (grunt) {
         'concurrent:dist',
         'autoprefixer',
         'copy:dist',
-        'modernizr'
+        'useminPrepare', // <% if (includeModernizr) { %>
+        'modernizr', // <% } %>
+        'usemin'
     ]);
 
     grunt.registerTask('default', [
