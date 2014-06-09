@@ -90,6 +90,7 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
   projectfiles: function () {
     this.copy('editorconfig', '.editorconfig');
     this.copy('jshintrc', '.jshintrc');
+    this.copy('gitignore', '.gitignore');
   },
 
   mainStylesheet: function() {
