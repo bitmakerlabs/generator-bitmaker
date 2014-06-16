@@ -52,6 +52,10 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
       name: 'includeBootstrap',
       message: "Do you want to add Bootstrap to this project?",
       default: false
+    }, {
+      type: 'input',
+      name: 'includeBuildControl',
+      message: 'Do you have a GitHub repo for this project? Paste it in here to make deploying your prototype a snap (simply type: \'grunt buildcontrol:pages\'). If you haven\'t set one up yet, don\'t worry, you can do it later, just look for \'!!! PASTE YOUR GITHUB REPO URL HERE\' in the Gruntfile'
     }];
 
     this.prompt(prompts, function (answers) {
@@ -65,6 +69,7 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
       this.includeModernizr = hasFeature('includeModernizr');
       this.includeBourbon = answers.includeBourbon;
       this.includeBootstrap = answers.includeBootstrap;
+      this.includeBuildControl = answers.includeBuildControl;
 
       done();
     }.bind(this));

@@ -219,6 +219,27 @@ module.exports = function (grunt) {
             }
         },
 
+        buildcontrol: {
+          options: {
+            dir: 'dist',
+            commit: true,
+            push: true,
+            message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+          },
+          pages: {
+            options: {
+              remote: <% if (includeBuildControl) { %>'<%= includeBuildControl %>'<% } else { %>'!!! PASTE YOUR GITHUB REPO URL HERE'<% } %>,
+              branch: 'gh-pages'
+            }
+          },
+          local: {
+            options: {
+              remote: '../',
+              branch: 'build'
+            }
+          }
+        },
+
         // <% if (includeModernizr) { %>
         // Generates a custom Modernizr build that includes only the tests you
         // reference in your app
