@@ -55,7 +55,20 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
     }, {
       type: 'input',
       name: 'includeBuildControl',
-      message: chalk.bold('Do you have a GitHub repo for this project?') + '\nPaste it in here to make deploying your prototype a snap (type: ' + chalk.inverse('\'grunt buildcontrol:pages\'') + ').\n\nIf you haven\'t set one up yet, don\'t worry, you can do it later, just look for ' + chalk.bold('\'!!! PASTE YOUR GITHUB REPO URL HERE\'') + ' in the generated ' + chalk.bold('Gruntfile')
+      message: chalk.bold('Do you have a GitHub repo for this project?') +
+                '\n    Paste it in here to make deploying your prototype a snap (type: ' +
+                chalk.inverse('grunt buildcontrol:pages') +
+                ').\n    NOTE: Your URL must start with ' + chalk.bold('git@github.com') + ' for this to work!' +
+                '\n\n    If you haven\'t set one up yet, don\'t worry, you can do it later.\n    Simply find and replace ' +
+                chalk.bold('\'!!! PASTE YOUR GITHUB REPO URL HERE\'') +
+                ' in the generated ' + chalk.bold('Gruntfile.js'),
+      validate: function(input) {
+        if ( input && !/$git@github.com/.test(input) ) {
+          return 'Your GitHub repo URL must start with ' + chalk.bold('git@github.com');
+        }
+
+        return true;
+      }
     }];
 
     this.prompt(prompts, function (answers) {
