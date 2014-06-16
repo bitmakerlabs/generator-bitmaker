@@ -55,7 +55,7 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
     }, {
       type: 'input',
       name: 'includeBuildControl',
-      message: 'Do you have a GitHub repo for this project? Paste it in here to make deploying your prototype a snap (simply type: \'grunt buildcontrol:pages\'). If you haven\'t set one up yet, don\'t worry, you can do it later, just look for \'!!! PASTE YOUR GITHUB REPO URL HERE\' in the Gruntfile'
+      message: chalk.bold('Do you have a GitHub repo for this project?') + '\nPaste it in here to make deploying your prototype a snap (simply type: ' + chalk.inverse('\'grunt buildcontrol:pages\'' + ').\n\nIf you haven\'t set one up yet, don\'t worry, you can do it later, just look for ' + chalk.bold('\'!!! PASTE YOUR GITHUB REPO URL HERE\'') + ' in the generated ' + chalk.bold('Gruntfile')
     }];
 
     this.prompt(prompts, function (answers) {
