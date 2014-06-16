@@ -63,7 +63,7 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
                 chalk.bold('\'!!! PASTE YOUR GITHUB REPO URL HERE\'') +
                 ' in the generated ' + chalk.bold('Gruntfile.js'),
       validate: function(input) {
-        if ( input && !/$git@github.com/.test(input) ) {
+        if ( input && !/^git@github.com/.test(input) ) {
           return 'Your GitHub repo URL must start with ' + chalk.bold('git@github.com');
         }
 
