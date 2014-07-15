@@ -195,7 +195,9 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.webp',
                         '{,*/}*.html',
-                        'styles/fonts/{,*/}*.*'
+                        'styles/fonts/{,*/}*.*',
+                        'images',
+                        'README.md'
                     ]
                 },{
                   expand: true,
@@ -317,6 +319,9 @@ module.exports = function (grunt) {
         'copy:dist',
         'useminPrepare', // <% if (includeModernizr) { %>
         'modernizr', // <% } %>
+        'concat',
+        'cssmin',
+        'uglify',
         'usemin'
     ]);
 

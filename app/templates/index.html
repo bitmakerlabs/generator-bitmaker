@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <title><%= appname %></title>
 
+    <!-- build:css /styles/vendor.css -->
     <link rel="stylesheet" type="text/css" href="../bower_components/normalize-css/normalize.css">
-    <% if (includeBootstrap && !includeSass) { %><link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"><% } %>
+    <% if (includeBootstrap && !includeSass) { %>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <% } %>
+    <!-- endbuild -->
+
     <link rel="stylesheet" href="styles/main.css">
 
     <% if (includeModernizr) { %>
@@ -16,9 +21,11 @@
   </head>
 
   <body>
-    Time to start prototyping!
+    <h1>Time to start prototyping!</h1>
 
+    <!-- build:js /scripts/main.js -->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="scripts/main.js"></script>
+    <!-- endbuild -->
   </body>
 </html>
