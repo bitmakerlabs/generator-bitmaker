@@ -25,7 +25,9 @@
     "bitmaker",
     "rapid-prototyping",
     "prototyping",
-    "bitmaker-prototyping"
+    "bitmaker-prototyping",
+    "front-end-development",
+    "fed"
   ],
   "dependencies": {
     "yeoman-generator": "~0.17.0",
