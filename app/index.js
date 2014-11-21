@@ -7,17 +7,11 @@ var chalk = require('chalk');
 
 
 var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
-  init: function () {
+  initializing: function () {
     this.pkg = require('../package.json');
-
-    this.on('end', function () {
-      if (!this.options['skip-install']) {
-        this.installDependencies();
-      }
-    });
   },
 
-  askFor: function () {
+  prompting: function () {
     var done = this.async();
 
     // Have Yeoman greet the user.
@@ -88,45 +82,38 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
     }.bind(this));
   },
 
-  app: function () {
-    this.mkdir('app');
-    this.mkdir('app/styles');
-    this.mkdir('app/scripts');
-    this.mkdir('app/images');
+  writing: {
+    app: function () {
+      this.mkdir('app');
+      this.mkdir('app/styles');
+      this.mkdir('app/scripts');
+      this.mkdir('app/images');
 
-    this.template('_package.json', 'package.json');
-    this.template('_bower.json', 'bower.json');
+      this.template('_package.json', 'package.json');
+      this.template('_bower.json', 'bower.json');
 
-    this.copy('index.html', 'app/index.html');
-    this.copy('main.js', 'app/scripts/main.js');
-  },
+      this.copy('index.html', 'app/index.html');
+      this.copy('main.js', 'app/scripts/main.js');
+    },
 
-  gruntfile: function() {
-    this.template('Gruntfile.js');
-  },
+    gruntfile: function() {
+      this.template('Gruntfile.js');
+    },
 
-  projectfiles: function () {
-    this.copy('editorconfig', '.editorconfig');
-    this.copy('jshintrc', '.jshintrc');
-    this.copy('gitignore', '.gitignore');
-  },
+    projectfiles: function () {
+      this.copy('editorconfig', '.editorconfig');
+      this.copy('jshintrc', '.jshintrc');
+      this.copy('gitignore', '.gitignore');
+    },
 
-  mainStylesheet: function() {
-    var css = 'main.' + (this.includeSass ? 's' : '') + 'css';
-    this.copy('main.css', 'app/styles/' + css);
-  },
-
-  install: function() {
-    if (this.options['skip-install']) {
-      return;
+    mainStylesheet: function() {
+      var css = 'main.' + (this.includeSass ? 's' : '') + 'css';
+      this.copy('main.css', 'app/styles/' + css);
     }
+  },
 
-    var done = this.async();
-    this.installDependencies({
-      skipMessage: this.options['skip-install-message'],
-      skipInstall: this.options['skip-install'],
-      callback: done
-    });
+  end: function() {
+    this.installDependencies();
   }
 });
 
