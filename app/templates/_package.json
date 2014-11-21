@@ -24,6 +24,10 @@
     "jshint-stylish": "~1.0.0",
     "grunt-build-control": "~0.1.3"
   },
+  "peerDependencies": {
+    "grunt-cli": "latest",
+    "bower": "latest"
+  },
   "engines": {
     "node": ">=0.10.0"
   }
