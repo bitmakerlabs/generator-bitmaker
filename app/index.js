@@ -4,11 +4,13 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
+var faker = require('faker');
 
 
 var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
+    this.appname = [faker.internet.domainWord(), faker.internet.domainWord(), faker.random.number(9999)].join('-');
   },
 
   prompting: function () {
@@ -18,6 +20,10 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
     this.log(yosay('Welcome to the marvelous Bitmaker generator! Let\'s get your project setup, shall we?'));
 
     var prompts = [{
+      type: 'input',
+      name: 'projectName',
+      message: 'Tell me the name of your project (or I\'ll name it ' + this.appname + ')'
+    }, {
       type: 'checkbox',
       name: 'features',
       message: 'What extra tools would you like to add?',
@@ -72,6 +78,8 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
         return features.indexOf(feat) !== -1;
       }
 
+      this.appname = answers.projectName || this.appname;
+      this.appFolder = faker.helpers.slugify(this.appname).toLowerCase();
       this.includeSass = hasFeature('includeSass');
       this.includeModernizr = hasFeature('includeModernizr');
       this.includeBourbon = answers.includeBourbon;
@@ -83,17 +91,22 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
   },
 
   writing: {
+    base: function() {
+      this.dest.mkdir( this.appFolder );
+      this.destinationRoot( this.appFolder );
+    },
+
     app: function () {
-      this.mkdir('app');
-      this.mkdir('app/styles');
-      this.mkdir('app/scripts');
-      this.mkdir('app/images');
+      this.dest.mkdir('app');
+      this.dest.mkdir('app/styles');
+      this.dest.mkdir('app/scripts');
+      this.dest.mkdir('app/images');
 
       this.template('_package.json', 'package.json');
       this.template('_bower.json', 'bower.json');
 
-      this.copy('index.html', 'app/index.html');
-      this.copy('main.js', 'app/scripts/main.js');
+      this.template('index.html', 'app/index.html');
+      this.src.copy('main.js', 'app/scripts/main.js');
     },
 
     gruntfile: function() {
@@ -101,19 +114,24 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
     },
 
     projectfiles: function () {
-      this.copy('editorconfig', '.editorconfig');
-      this.copy('jshintrc', '.jshintrc');
-      this.copy('gitignore', '.gitignore');
+      this.src.copy('editorconfig', '.editorconfig');
+      this.src.copy('jshintrc', '.jshintrc');
+      this.src.copy('gitignore', '.gitignore');
+      this.template('README.md', 'README.md');
     },
 
     mainStylesheet: function() {
       var css = 'main.' + (this.includeSass ? 's' : '') + 'css';
-      this.copy('main.css', 'app/styles/' + css);
+      this.template('main.css', 'app/styles/' + css);
     }
   },
 
   end: function() {
-    this.installDependencies();
+    this.installDependencies({
+      callback: function() {
+        this.log('\n\n' + chalk.bold('ALL DONE!') + '\nNow switch into ' + chalk.bold(this.appFolder) + ' (cd ' + this.appFolder + ') and run ' + chalk.bold('grunt') + '.');
+      }.bind(this)
+    });
   }
 });
 
