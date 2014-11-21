@@ -1,6 +1,11 @@
 {
   "name": "<%= _.slugify(appname) %>",
   "version": "0.0.0",
+  "description": "A project created for the Bitmaker Labs Front-End Development course using the bitmaker-prototyping Yeoman generator",
+  "repository": {
+    "type": "git",
+    "url": "<%= includeBuildControl %>"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "0.4.5",
@@ -23,10 +28,6 @@
     "time-grunt": "~1.0.0",
     "jshint-stylish": "~1.0.0",
     "grunt-build-control": "~0.1.3"
-  },
-  "peerDependencies": {
-    "grunt-cli": "latest",
-    "bower": "latest"
   },
   "engines": {
     "node": ">=0.10.0"
