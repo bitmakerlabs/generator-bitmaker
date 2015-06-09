@@ -71,7 +71,7 @@ module.exports = function (grunt) {
                 open: true,
                 livereload: 35729,
                 // Change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                hostname: '*'
             },
             livereload: {
                 options: {
@@ -178,8 +178,8 @@ module.exports = function (grunt) {
             options: {
                 assetsDirs: ['<%%= config.dist %>']
             },
-            html: ['<%%= config.dist %>/{,*/}*.html'],
-            css: ['<%%= config.dist %>/styles/{,*/}*.css']
+            html: ['<%%= config.dist %>/**/*.html'],
+            css: ['<%%= config.dist %>/styles/**/*.css']
         },
 
         // Copies remaining files to places other tasks can use
@@ -193,23 +193,22 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,png,txt}',
                         '.htaccess',
-                        'images/{,*/}*.*',
-                        '{,*/}*.html',
-                        'styles/fonts/{,*/}*.*',
-                        'images',
+                        'images/**',
+                        'styles/fonts/**',
+                        'fonts/**'
                         'README.md'
                     ]
                 },{
                   expand: true,
                   cwd: '.tmp/styles',
-                  src: '{,*/}*.css',
+                  src: '**/*.css',
                   dest: '<%%= config.dist %>/styles/'
                 },{
                   expand: true,
                   dot: true,
                   cwd: '<%%= config.app %>/scripts',
                   dest: '<%%= config.dist %>/scripts/',
-                  src: '{,*/}*.js'
+                  src: '**/*.js'
                 }]
             },
             styles: {
@@ -217,7 +216,7 @@ module.exports = function (grunt) {
                 dot: true,
                 cwd: '<%%= config.app %>/styles',
                 dest: '.tmp/styles/',
-                src: '{,*/}*.css'
+                src: '**/*.css'
             }
         },
 
