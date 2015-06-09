@@ -1,10 +1,10 @@
 {
-  "name": "generator-bitmaker-prototyping",
-  "version": "1.0.1",
+  "name": "generator-bitmaker",
+  "version": "1.1.0",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "bitmakerlabs/generator-bitmaker-prototyping",
+  "repository": "bitmakerlabs/generator-bitmaker",
   "author": {
     "name": "Mina Mikhail",
     "email": "mina@bitmakerlabs.com",
