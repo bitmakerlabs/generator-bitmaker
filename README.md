@@ -18,7 +18,7 @@ There are two ways to use this generator. Generally, to avoid esoteric setup iss
 
 ### Vagrant Installation
 
-We will be using this generator through a [Vagrant](http://vagrantup.com) box, which will have it pre-installed. The Vagrant box, along with setup instructions, can be found at the [vagrant-fed](https://github.com/bitmakerlabs/vagrant-fed) repository.
+We will be using this generator through a [Vagrant](http://vagrantup.com) box, which will have it pre-installed. The Vagrant box, along with setup instructions, can be found at the [fed-vagrant](https://github.com/bitmakerlabs/fed-vagrant) repository.
 
 
 ### Manual Installation
