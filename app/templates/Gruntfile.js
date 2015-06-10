@@ -195,7 +195,7 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/**',
                         'styles/fonts/**',
-                        'fonts/**'
+                        'fonts/**',
                         'README.md'
                     ]
                 },{
