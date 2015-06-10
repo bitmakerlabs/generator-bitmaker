@@ -1,6 +1,6 @@
 # Bitmaker Front-End Development Yeoman Generator
 
-[Yeoman](http://yeoman.io) is a combination of three tools that will help you quickly create new projects with everything you need to get working on your prototypes quickly. The three tools are Yo, a scaffolding tool that will setup project directories and files for you, [Grunt](http://gruntjs.com), a task runner, and [Bower](http://bower.io), a package manager that will fetch JavaScript and stylesheets from around the web for use in your project.
+[Yeoman](http://yeoman.io) is a combination of three tools that will help you create new projects with everything you need to get working on your designs quickly. The three tools are Yo, a scaffolding tool that will setup project directories and files for you, [Grunt](http://gruntjs.com), a task runner, and [Bower](http://bower.io), a package manager that will fetch JavaScript and stylesheets from around the web for use in your project.
 
 This generator will help you create a baseline project for your work in the course that will speed up your development time and help you deploy your code to the web.
 
