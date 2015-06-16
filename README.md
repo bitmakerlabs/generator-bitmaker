@@ -21,6 +21,30 @@ There are two ways to use this generator. Generally, to avoid esoteric setup iss
 We will be using this generator through a [Vagrant](http://vagrantup.com) box, which will have it pre-installed. The Vagrant box, along with setup instructions, can be found at the [fed-vagrant](https://github.com/bitmakerlabs/fed-vagrant) repository.
 
 
+## Usage
+
+Here are the final setup instructions for scaffolding out new projects. This is the workflow we'll be using from now on when developing with Sass. **We'll discuss this in class and do the following steps together, these instructions are just for future reference.**
+
+### Any time you're creating a new project
+
+0. **If using Vagrant**, you'll do the following steps to start your Vagrant box
+  - `vagrant up`
+  - `vagrant ssh`
+  - `cd projects`
+1. Run the Bitmaker generator by running `yo bitmaker`
+2. Answer the questions it asks you and watch it go!
+  - Give your project a cool name or the generator will pick one at random for you
+  - Accepting the defaults is probably a good way to start
+  - At the end it will have created a project folder using your project name (it'll turn spaces into dashes and make it all lowercase)
+  - Once it's done, switch into that project directory (`cd <project-name>`) and run grunt to get to work!
+3. Open that project directory in your editor of choice to take a look at what it created for you.
+
+You'll find that all the files you need to edit are under an `app/` directory in your project folder. You can safely ignore the rest of the stuff for now, it's just supporting files that help make the magic happen.
+
+Now that the project is setup, run the `grunt` command at the command line (inside your Vagrant box, if using it) to start up a server that will serve your page in a browser and watch for changes to your files. Whenever a file changes, the page in the browser will automatically reload.
+
+---
+
 ### Manual Installation
 
 **NOTE: It's much easier and more reliable to use the above Vagrant option!**
@@ -61,34 +85,10 @@ You can also install this generator manually on your computer. You'll need to fi
   - Mac users will need to install Command-Line Tools from Apple
     - The installer will attempt to do this for you, but if it doesn't succeed you'll need to do it manually
       - [Command Line Tools from the Apple Developer website](https://developer.apple.com/downloads/index.action). You'll need to login with your iTunes credentials and find the correct version of Command Line Tools for your version of OS X
-      - You can find your version of OS X by clicking on the Apple icon at the top left and choosing 'About this Mac'
+      - You can find your version of OS X by clicking on the Apple icon () at the top left and choosing 'About this Mac'
   - **If you're running OS X 10.6.8 (Snow Leopard) or older, these instructions won't work for you!** See us during class or office hours for help.
 
 ```curl https://raw.githubusercontent.com/bitmakerlabs/front-end-development/master/install.sh | sh```
-
-
-## Usage
-
-Here are the final setup instructions for scaffolding out new projects. This is the workflow we'll be using from now on when developing with Sass. **We'll discuss this in class and do the following steps together, these instructions are just for future reference.**
-
-### Any time you're creating a new project
-
-0. **If using Vagrant**, you'll do the following steps to start your Vagrant box
-  - `vagrant up`
-  - `vagrant ssh`
-  - `cd projects`
-1. Run the Bitmaker generator by running `yo bitmaker`
-2. Answer the questions it asks you and watch it go!
-  - Give your project a cool name or the generator will pick one at random for you
-  - Accepting the defaults is probably a good way to start
-  - At the end it will have created a project folder using your project name (it'll turn spaces into dashes and make it all lowercase)
-  - Once it's done, switch into that project directory (`cd <project-name>`) and run grunt to get to work!
-3. Open that project directory in your editor of choice to take a look at what it created for you.
-
-You'll find that all the files you need to edit are under an `app/` directory in your project folder. You can safely ignore the rest of the stuff for now, it's just supporting files that help make the magic happen.
-
-Now that the project is setup, run the `grunt` command at the command line (inside your Vagrant box, if using it) to start up a server that will serve your page in a browser and watch for changes to your files. Whenever a file changes, the page in the browser will automatically reload.
-
 
 
 ## License
