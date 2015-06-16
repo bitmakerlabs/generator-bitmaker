@@ -44,7 +44,7 @@ You can also install this generator manually on your computer. You'll need to fi
   - On Windows, open the Command Line by typing `powershell` in the Run box of the Start Menu (you can open the Run box by pressing `WindowsKey+R`). This will only work if you're running Windows 7 or later.
 5. Install [Visual Studio 2013 WD](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop)
   - Because the generator depends on [node-sass](https://github.com/sass/node-sass#install), Windows users need this to build the required binaries
-6. Type `npm install -g yo grunt-cli bower generator-bitmaker-prototyping` and hit enter
+6. Type `npm install -g yo grunt-cli bower generator-bitmaker` and hit enter
   - You must be connected to the Internet for this step to work
   - You'll see a ton of output from doing this and it may take a little while
 
@@ -61,7 +61,7 @@ You can also install this generator manually on your computer. You'll need to fi
   - Mac users will need to install Command-Line Tools from Apple
     - The installer will attempt to do this for you, but if it doesn't succeed you'll need to do it manually
       - [Command Line Tools from the Apple Developer website](https://developer.apple.com/downloads/index.action). You'll need to login with your iTunes credentials and find the correct version of Command Line Tools for your version of OS X
-      - You can find your version of OS X by clicking on the ï£¿ icon at the top left and choosing 'About this Mac'
+      - You can find your version of OS X by clicking on the Apple icon at the top left and choosing 'About this Mac'
   - **If you're running OS X 10.6.8 (Snow Leopard) or older, these instructions won't work for you!** See us during class or office hours for help.
 
 ```curl https://raw.githubusercontent.com/bitmakerlabs/front-end-development/master/install.sh | sh```
