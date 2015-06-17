@@ -44,10 +44,12 @@ module.exports = function (grunt) {
             gruntfile: {
                 files: ['Gruntfile.js']
             },
+            <% if ( includeSass )  { %>
             sass: {
                 files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['sass:server', 'autoprefixer']
             },
+            <% } %>
             styles: {
                 files: ['<%%= config.app %>/styles/{,*/}*.css'],
                 tasks: ['newer:copy:styles', 'autoprefixer']
@@ -263,14 +265,18 @@ module.exports = function (grunt) {
         // Run some tasks in parallel to speed up build process
         concurrent: {
             server: [
+              <% if ( includeSass ) { %>
                 'sass:server',
+              <% } %>
                 'copy:styles'
             ],
             test: [
                 'copy:styles'
             ],
             dist: [
+              <% if ( includeSass ) { %>
                 'sass',
+              <% } %>
                 'copy:styles'
             ]
         }
