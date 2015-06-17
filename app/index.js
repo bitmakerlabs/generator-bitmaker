@@ -79,12 +79,17 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
       }
 
       this.appname = answers.projectName || this.appname;
-      this.appFolder = faker.helpers.slugify(this.appname).toLowerCase();
-      this.includeSass = hasFeature('includeSass');
-      this.includeModernizr = hasFeature('includeModernizr');
-      this.includeBourbon = answers.includeBourbon;
-      this.includeBootstrap = answers.includeBootstrap;
-      this.includeBuildControl = answers.includeBuildControl;
+
+      this.userOptions = {
+        pkg: this.pkg,
+        appname: this.appname,
+        appFolder: faker.helpers.slugify(this.appname).toLowerCase(),
+        includeSass: hasFeature('includeSass'),
+        includeModernizr: hasFeature('includeModernizr'),
+        includeBourbon: answers.includeBourbon,
+        includeBootstrap: answers.includeBootstrap,
+        includeBuildControl: answers.includeBuildControl
+      }
 
       done();
     }.bind(this));
@@ -92,44 +97,69 @@ var BitmakerPrototypingGenerator = yeoman.generators.Base.extend({
 
   writing: {
     base: function() {
-      this.dest.mkdir( this.appFolder );
-      this.destinationRoot( this.appFolder );
+      this.destinationRoot( this.userOptions.appFolder );
     },
 
     app: function () {
-      this.dest.mkdir('app');
-      this.dest.mkdir('app/styles');
-      this.dest.mkdir('app/scripts');
-      this.dest.mkdir('app/images');
+      this.fs.copyTpl(
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json'),
+        this.userOptions
+      );
 
-      this.template('_package.json', 'package.json');
-      this.template('_bower.json', 'bower.json');
+      this.fs.copyTpl(
+        this.templatePath('_bower.json'),
+        this.destinationPath('bower.json'),
+        this.userOptions
+      );
 
-      this.template('index.html', 'app/index.html');
-      this.src.copy('main.js', 'app/scripts/main.js');
+      this.fs.copyTpl(
+        this.templatePath('index.html'),
+        this.destinationPath('app/index.html'),
+        this.userOptions
+      );
+
+      this.fs.copy(
+        this.templatePath('main.js'),
+        this.destinationPath('app/scripts/main.js')
+      );
     },
 
     gruntfile: function() {
-      this.template('Gruntfile.js');
+      this.fs.copyTpl(
+        this.templatePath('Gruntfile.js'),
+        this.destinationPath('Gruntfile.js'),
+        this.userOptions
+      );
     },
 
     projectfiles: function () {
-      this.src.copy('editorconfig', '.editorconfig');
-      this.src.copy('jshintrc', '.jshintrc');
-      this.src.copy('gitignore', '.gitignore');
-      this.template('README.md', 'README.md');
+      this.fs.copy(this.templatePath('editorconfig'), this.destinationPath('.editorconfig'));
+      this.fs.copy(this.templatePath('jshintrc'), this.destinationPath('.jshintrc'));
+      this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
+
+      this.fs.copyTpl(
+        this.templatePath('README.md'),
+        this.destinationPath('README.md'),
+        this.userOptions
+      );
     },
 
     mainStylesheet: function() {
-      var css = 'main.' + (this.includeSass ? 's' : '') + 'css';
-      this.template('main.css', 'app/styles/' + css);
+      var css = 'main.' + (this.userOptions.includeSass ? 's' : '') + 'css';
+
+      this.fs.copyTpl(
+        this.templatePath('main.css'),
+        this.destinationPath('app/styles/' + css),
+        this.userOptions
+      );
     }
   },
 
   end: function() {
     this.installDependencies({
       callback: function() {
-        this.log('\n\n' + chalk.bold('ALL DONE!') + '\nNow switch into ' + chalk.bold(this.appFolder) + ' (cd ' + this.appFolder + ') and run ' + chalk.bold('grunt') + '.');
+        this.log('\n\n' + chalk.bold('ALL DONE!') + '\nNow switch into ' + chalk.bold(this.userOptions.appFolder) + ' (cd ' + this.userOptions.appFolder + ') and run ' + chalk.bold('grunt') + '.');
       }.bind(this)
     });
   }
