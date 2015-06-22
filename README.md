@@ -4,6 +4,10 @@
 
 This generator will help you create a baseline project for your work in the course that will speed up your development time and help you deploy your code to the web.
 
+## Breaking Change!
+
+The latest version of the Bitmaker Generator depends on Ruby for Sass compilation. This means you must have Ruby and the Sass gem installed on your system for it to work properly. This is taken care of if you follow the [Vagrant Installation](#vagrant-installation) steps below.
+
 
 ## PRE-FLIGHT: THE COMMAND LINE INTERFACE
 
