@@ -1,6 +1,6 @@
 {
   "name": "generator-bitmaker",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Yeoman generator for Bitmaker Front-End Developement course",
   "license": "MIT",
   "main": "app/index.js",
