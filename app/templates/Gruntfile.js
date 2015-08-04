@@ -198,7 +198,8 @@ module.exports = function (grunt) {
                         'images/**',
                         'styles/fonts/**',
                         'fonts/**',
-                        'README.md'
+                        'README.md',
+                        '**/*.html'
                     ]
                 },{
                   expand: true,
